@@ -3,6 +3,7 @@ package com.bit2017.mysite.dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.bit2017.mysite.vo.UserVo;
@@ -24,6 +25,52 @@ public class UserDao {
 		conn = DriverManager.getConnection(url, "webdb", "webdb");
 		
 		return conn;
+	}
+	
+	public UserVo get( String email, String password ) {
+		UserVo userVo = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = getConnection();
+			
+			String sql = "select no, name from users where email=? and password=?";
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString( 1, email );
+			pstmt.setString( 2, password );
+			
+			rs = pstmt.executeQuery();
+			if( rs.next() ) {
+				Long no = rs.getLong( 1 );
+				String name = rs.getString( 2 );
+				
+				userVo = new UserVo();
+				userVo.setNo(no);
+				userVo.setName(name);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println( "error:" + e );
+		} finally {
+			try {
+				if( rs != null ) {
+					rs.close();
+				}
+				if( pstmt != null ) {
+					pstmt.close();
+				}
+				if( conn != null ) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				System.out.println( "error:" + e );
+			}  
+		}
+		
+		return userVo;
 	}
 	
 	public boolean insert( UserVo userVo ) {

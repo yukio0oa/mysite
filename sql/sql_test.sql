@@ -6,4 +6,10 @@ values ( seq_users.nextval, '안대혁', 'kickscar@gmail.com', '1234', 'male');
 
 rollback;
 
-select * from users; 
+select no, name, email 
+  from users
+ where email='kickscar@gmail.com'
+   and password = '1234';
+   
+   
+     

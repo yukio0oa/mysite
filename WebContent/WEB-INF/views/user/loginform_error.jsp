@@ -22,11 +22,9 @@
 					
 					<label class="block-label" >패스워드</label>
 					<input name="password" type="password" value="">
-					<c:if test="${param.result == 'fail' }">
-						<p>
-							로그인이 실패 했습니다.
-						</p>
-					</c:if>
+					<p>
+						로그인이 실패 했습니다.
+					</p>
 					<input type="submit" value="로그인">
 				</form>
 			</div>

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.bit2017.web.Action;
 import com.bit2017.web.util.WebUtil;
 
-public class LoginForm implements Action {
+public class LoginFormAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {

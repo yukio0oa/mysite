@@ -29,7 +29,7 @@ values (seq_board.nextval,
 		2); 
 
 commit;
-
+rollback;
 -- list
 select *
   from ( select rownum rn, c.*

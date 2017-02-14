@@ -31,18 +31,25 @@ values (seq_board.nextval,
 commit;
 
 -- list
-  select rownum, c.*
-  from   ( select a.no, 
-                  a.title, 
-	              a.hit, 
-	              to_char(a.reg_date, 'yyyy-mm-dd'),
-	              b.name as user_name,
-	              b.no as users_no  
-             from board a,
-                  users b
-            where a.users_no = b.no
-          order by a.g_no desc, a.o_no asc) c  	   
-	   
+select *
+  from ( select rownum rn, c.*
+           from ( select a.no, 
+                         a.title, 
+	                     a.hit, 
+	                     to_char(a.reg_date, 'yyyy-mm-dd'),
+	                     b.name as user_name,
+	                     b.no as users_no  
+                    from board a,
+                         users b
+                   where a.users_no = b.no
+                  order by a.g_no desc, a.o_no asc) c )
+  where (1-1)*5 + 1 <= rn and rn <= 1*5				  
+		  
+		    	   
+--   	   
+--  
+--  where 6 <= rownum and rownum <= 10
+   	   
 
 
  

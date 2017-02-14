@@ -38,7 +38,8 @@ select *
 	                     a.hit, 
 	                     to_char(a.reg_date, 'yyyy-mm-dd'),
 	                     b.name as user_name,
-	                     b.no as users_no  
+	           
+			             b.no as users_no  
                     from board a,
                          users b
                    where a.users_no = b.no

@@ -22,9 +22,11 @@ public class LoginAction implements Action {
 		UserVo userVo = new UserDao().get( email, password );
 		if( userVo == null ) {
 			//로그인 실패 처리(리다이렉트방식)
-			WebUtil.redirect( "/mysite/user?a=loginform&result=fail", request, response);
+			WebUtil.redirect( request.getContextPath() + "/user?a=loginform&result=fail", request, response);
+			
 			//로그인 실패 처리(포워드방식)
 			//WebUtil.forward( "/WEB-INF/views/user/loginform_error.jsp", request, response);
+			
 			return;
 		}
 		
@@ -32,7 +34,7 @@ public class LoginAction implements Action {
 		HttpSession session = request.getSession( true );
 		session.setAttribute( "authUser", userVo );
 		
-		WebUtil.redirect( "/mysite/main", request, response);
+		WebUtil.redirect( request.getContextPath() + "/main", request, response);
 		
 	}
 

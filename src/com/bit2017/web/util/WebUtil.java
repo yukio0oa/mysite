@@ -26,4 +26,24 @@ public class WebUtil {
 		throws IOException, ServletException {
 		response.sendRedirect( url );
 	}
+	
+	public static String checkNullParam(String s, String value) {
+		return s != null ? s : value;
+	}
+
+	public static int checkNullParam(String s, int value) {
+		return s != null ? checkIntParam(s, value) : value;
+	}
+
+	public static long checkNullParam(String s, long value) {
+		return s != null ? checkLongParam(s, value) : value;
+	}
+
+	public static int checkIntParam(String s, int value) {
+		return (s != null && s.matches("\\d*\\.?\\d+")) ? Integer.parseInt(s) : value;
+	}
+
+	public static long checkLongParam(String s, long value) {
+		return (s != null && s.matches("\\d*\\.?\\d+")) ? Long.parseLong(s) : value;
+	}	
 }
